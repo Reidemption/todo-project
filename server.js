@@ -2,8 +2,10 @@
 const express = require("express");
 const { model } = require("mongoose");
 const { store, Todo } = require("./model.js");
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 // tell the app to use json
 app.use(express.json({}));
 
