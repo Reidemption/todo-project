@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>To-do | Reid Gubler</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>Todo App</h1>
+      <div class="input">
+        <h2>Create Todo</h2>
+        <label>Name</label>
+        <input
+          type="text"
+          v-model="new_todo_name"
+          placeholder="Enter a new todo name"
+        />
+        <label>Description</label>
+        <input
+          type="text"
+          v-model="new_todo_description"
+          placeholder="Enter a new todo description"
+        />
+        <label>Deadline</label>
+        <input
+          type="date"
+          v-model="new_todo_deadline"
+          placeholder="Enter a new todo deadline"
+        />
+        <button v-on:click="addNewTodo()">Add</button>
+      </div>
+      <h2>Your Todo List</h2>
+
+      <ul>
+        <li v-for="(todo,index) in todos">
+          <div v-if="todo.editing">
+            <input type="text" v-model="todo.name" />
+            <input type="text" v-model="todo.description" />
+            <input type="text" v-model="todo.deadline" />
+            <button v-on:click="saveTodo(todo)">Save</button>
+          </div>
+
+          <div v-else>
+            <div>{{ todo.name }}</div>
+            <div>{{ todo.description }}</div>
+            <div>{{ todo.deadline }}</div>
+            <input
+              type="checkbox"
+              v-model="todo.done"
+              v-on:change="saveTodoDone(todo)"
+            />
+            <button v-on:click="editTodo(todo)">Edit</button>
+            <button v-on:click="deleteTodo(todo._id)">Delete</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
