@@ -2,7 +2,6 @@
 const express = require("express");
 const { model } = require("mongoose");
 const { store, Todo } = require("./model.js");
-const fileManager = require("./file-manager.js");
 const app = express();
 
 // tell the app to use json
@@ -93,7 +92,6 @@ app.post("/todo/", function (req, res) {
         });
         return;
       }
-      fileManager.logTodoCreate(todo._id);
       res.status(201).json(todo);
     }
   );
@@ -116,7 +114,6 @@ app.delete("/todo/:id", function (req, res) {
       return;
     }
     // res.status(200).send(JSON.stringify(todo))
-    fileManager.logTodoDelete(todo._id);
     res.status(200).json(todo); //both lines of res.status work the same
   });
 });
